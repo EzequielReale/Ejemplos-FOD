@@ -23,11 +23,9 @@ type
 
 procedure leerAsistente(var a: asistente);
 begin
-    with a do 
-    begin
+    with a do begin
         write('Ingrese el nro de asistente: '); readln(nroAsistente);
-        if (nroAsistente <> -1) then
-        begin
+        if (nroAsistente <> -1) then begin
             write('Ingrese el apellido: '); readln(apellido);
             write('Ingrese el nombre: '); readln(nombre);
             write('Ingrese el email: '); readln(email);
@@ -56,12 +54,11 @@ var
     reg: asistente;
 begin
     reset(arch);
-    while (not eof(arch)) do
-    begin
+    while (not eof(arch)) do begin
         read(arch, reg);
         if (reg.nroAsistente < 1000) then
         begin
-            reg.apellido := '@' + reg.apellido;
+            reg.apellido := '@' + reg.apellido; // Le pongo un caracter especial para marcar que fue eliminado
             seek(arch, filepos(arch) - 1);
             write(arch, reg);
         end;
@@ -77,7 +74,7 @@ begin
     while (not eof(a)) do
     begin
         read(a, reg);
-        if (pos('@',reg_m.dni) = 0) then begin
+        if (pos('@',reg_m.dni) = 0) then begin // Pos es una funcion que devuelve la coincidencia de un caracter en un string. Entonces, si no tiene el caracter especial (no está borrado) imprimo
             writeln('Nro de asistente: ', reg.nroAsistente);
             writeln('Apellido: ', reg.apellido);
             writeln('Nombre: ', reg.nombre);
