@@ -126,11 +126,12 @@ begin
         if not(EOF(a)) then begin
             pos_act:= filePos(a) - 1;
             seek(a, fileSize(a) - 1);
-            read(a, regm);
+            read(a, regm); // copia el último registro
             seek(a, filePos(a) - 1);
-            truncate(a);
+            truncate(a); // pone marca de EOF
             seek(a, pos_act);
-            write(a, regm);
+            write(a, regm); // sobreescribe el registro a eliminar
+            seek(a, pos_act); // vuelvo a leer la posición, puesto que cabe la posibilidad de que el registro del final también estuviese borrado. Entonces re-chequeo
         end;
     end;
 
