@@ -58,7 +58,7 @@ begin
     reset(arch);
     leer(arch, reg);
 
-    while (reg.fecha.anio <> VALOR_ALTO) and (reg.fecha.anio <= anio) do leer(arch, reg); // Busco el año pedido
+    while (reg.fecha.anio <> VALOR_ALTO) and (reg.fecha.anio < anio) do leer(arch, reg); // Busco el año pedido
 
     if (reg.fecha.anio <> VALOR_ALTO) then begin // Si no llegue al final del archivo
         totalAnio := 0;
